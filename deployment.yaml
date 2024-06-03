@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cups
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cups
+  template:
+    metadata:
+      labels:
+        app: cups
+    spec:
+      containers:
+      - name: cups
+        image: cups:latest
+        ports:
+        - containerPort: 631
+        - containerPort: 443
+        # volumeMounts:
+    #     - mountPath: /etc/cups
+    #       name: cups-config
+    #     - mountPath: /var/spool/cups
+    #       name: cups-spool
+    #   volumes:
+    #   - name: cups-config
+    #     persistentVolumeClaim:
+    #       claimName: cups-pvc
+    #   - name: cups-spool
+    #     persistentVolumeClaim:
+    #       claimName: cups-pvc
